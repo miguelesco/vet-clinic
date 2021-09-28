@@ -12,4 +12,4 @@ CREATE TABLE animals (
 /* Add a column species of type string to your animals table. */
 
 ALTER TABLE animals
-ADD COLUMN species char;
+ADD COLUMN species char(500);
