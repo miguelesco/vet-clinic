@@ -40,6 +40,59 @@ WHERE name != 'Gabumon'
 SELECT * FROM animals
 WHERE weight_kg BETWEEN 10.4 AND 17.3 OR weight_kg = 10.4 AND weight_kg = 17.3;
 
+-- DAY 2 --
+
+/* Inside a transaction update the animals table by setting 
+the species column to unspecified. Verify that change was 
+made. Then roll back the change and verify that species 
+columns went back to the state before tranasction. */
+
+BEGIN;
+	UPDATE animals
+	SET species = 'unspecified';
+ROLLBACK;
+
+BEGIN;
+/* Update the animals table by setting the species column 
+to digimon for all animals that have a name ending in mon. */
+
+	UPDATE animals
+	SET species = 'digimon'
+	WHERE name LIKE '%mon';
+/* Update the animals table by setting the species column 
+to pokemon for all animals that don't have species already set. */
+
+	UPDATE animals
+	SET species = 'pokemon'
+	WHERE species ISNULL;
+COMMIT;
+
+/* Now, take a deep breath and... Inside a transaction delete all 
+records in the animals table, then roll back the transaction. */
+BEGIN;
+	DELETE FROM animals;
+ROLLBACK;
+
+BEGIN;
+/* Delete all animals born after Jan 1st, 2022. */
+	DELETE FROM animals
+	WHERE date_of_birth >= '2022-01-01';
+/* Create a savepoint for the transaction. */
+	SAVEPOINT deleteBirthDay;
+
+/* Update all animals' weight to be their weight multiplied by -1. */
+	UPDATE animals
+	SET weight_kg = weight_kg * -1;
+	
+/* Rollback to the savepoint */
+	ROLLBACK TO deleteBirthDay;
+
+/* Update all animals' weights that are negative to be their weight 
+multiplied by -1. */
+	UPDATE animals 
+	SET weight_kg = weight_kg * -1
+	WHERE SIGN(weight_kg) = -1; 
+COMMIT;
 
 /* How many animals are there? */
 SELECT COUNT(*) FROM animals;
