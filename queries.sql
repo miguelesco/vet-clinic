@@ -49,8 +49,10 @@ columns went back to the state before tranasction. */
 
 BEGIN;
 	UPDATE animals
-	SET species = 'unspecified';
+	SELECT species from animals;
 ROLLBACK;
+
+SELECT species from animals;
 
 BEGIN;
 /* Update the animals table by setting the species column 
