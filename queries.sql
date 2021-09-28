@@ -49,9 +49,13 @@ columns went back to the state before tranasction. */
 
 BEGIN;
 	UPDATE animals
+	SET species = 'unspecified';
 	SELECT species from animals;
+/* Then roll back the change */
 ROLLBACK;
 
+/* verify that species columns went back to 
+the state before tranasction. */
 SELECT species from animals;
 
 BEGIN;
@@ -69,11 +73,18 @@ to pokemon for all animals that don't have species already set. */
 	WHERE species ISNULL;
 COMMIT;
 
+/* Verify that change was made and persists after commit. */
+SELECT species FROM animals
+
 /* Now, take a deep breath and... Inside a transaction delete all 
 records in the animals table, then roll back the transaction. */
 BEGIN;
 	DELETE FROM animals;
 ROLLBACK;
+
+/* After the roll back verify if all records in the animals table still exist. 
+After that you can start breath as usual ;) */
+SELECT * FROM animals
 
 BEGIN;
 /* Delete all animals born after Jan 1st, 2022. */
@@ -95,6 +106,7 @@ multiplied by -1. */
 	SET weight_kg = weight_kg * -1
 	WHERE SIGN(weight_kg) = -1; 
 COMMIT;
+
 
 /* How many animals are there? */
 SELECT COUNT(*) FROM animals;
