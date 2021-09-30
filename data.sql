@@ -34,12 +34,15 @@ UPDATE animals SET species_id = CASE WHEN name LIKE '%mon' THEN 2 ELSE 1 END;
 
 /* Modify your inserted animals to include owner information (owner_id) */
 BEGIN;
-UPDATE animals SET owner_id = CASE 
-	WHEN name IN ('Agumon') THEN 1
-	WHEN name IN ('Gabumon', 'Pikachu') THEN 2
-	WHEN name IN ('Devimon', 'Plantmon') THEN 3
-	WHEN name IN ('Charmander', 'Squirtle', 'Blossom') THEN 4
-	WHEN name IN ('Angemon', 'Boarmon') THEN 5
-END;
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name = 'Agumon' AND owners.full_name= 'Sam Smith' ;
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Gabumon','Pikachu') AND owners.full_name= 'Jennifer Orwell';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Devimon','Plantmon') AND owners.full_name= 'Bob';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Charmander','Squirtle', 'Blossom') AND owners.full_name= 'Melody Pond';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Angemon','Boarmon') AND owners.full_name= 'Dean Winchester';
 
 COMMIT;
