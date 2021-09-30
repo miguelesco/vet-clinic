@@ -12,3 +12,37 @@ VALUES
 	(8, 'Angemon', 'Jun 12, 2005', 1, TRUE, -45),
 	(9, 'Boarmon', 'Jun 7, 2005', 7, TRUE, 20.4),
 	(10, 'Blossom', 'Oct 13, 1998', 3, TRUE, 17);
+
+/* Insert the following data into the owners table */
+INSERT INTO owners (full_name, age)
+VALUES 
+		('Sam Smith', 34),
+		('Jennifer Orwell', 19),
+		('Bob', 45),
+		('Melody Pond', 77),
+		('Dean Winchester', 14),
+		('Jodie Whittaker', 38);
+
+/* Insert the following data into the species table */
+INSERT INTO species (name)
+VALUES 
+		('Pokemon'),
+		('Digimon');
+
+/* Modify your inserted animals so it includes the species_id value: */
+UPDATE animals SET species_id = CASE WHEN name LIKE '%mon' THEN 2 ELSE 1 END;
+
+/* Modify your inserted animals to include owner information (owner_id) */
+BEGIN;
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name = 'Agumon' AND owners.full_name= 'Sam Smith' ;
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Gabumon','Pikachu') AND owners.full_name= 'Jennifer Orwell';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Devimon','Plantmon') AND owners.full_name= 'Bob';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Charmander','Squirtle', 'Blossom') AND owners.full_name= 'Melody Pond';
+
+UPDATE animals SET owner_id = owners.id FROM owners WHERE name IN ('Angemon','Boarmon') AND owners.full_name= 'Dean Winchester';
+
+COMMIT;
