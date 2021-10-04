@@ -26,6 +26,12 @@ This repository includes files with plain SQL that can be used to recreate a dat
 
 - GitHub: [@miguelesco](https://github.com/miguelesco)
 
+👤 **Luis Octavio Ramirez Cruz**
+
+- GitHub: [LOctavio](https://github.com/LOctavio)
+- Twitter: [@Octavio_ram431](https://twitter.com/Octavio_ram431)
+- LinkedIn: [Luis Octavio Ramirez Cruz](https://www.linkedin.com/in/luis-octavio-ramirez-cruz/)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
