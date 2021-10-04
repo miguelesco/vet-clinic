@@ -87,3 +87,12 @@ CREATE TABLE visits(
 	FOREIGN KEY(vet_id) REFERENCES vets(id),
 	FOREIGN KEY(animals_id) REFERENCES animals(id)
 );
+
+/* WEEK 2 */
+/* DAY 1 */
+
+CREATE INDEX visits_animals_id ON visits(animals_id ASC);
+
+CREATE INDEX visits_vet_id ON visits(vet_id ASC);
+
+CREATE INDEX owners_emails_asc ON owners(email ASC);
