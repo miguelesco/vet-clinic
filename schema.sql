@@ -59,3 +59,31 @@ BEGIN;
 	SELECT * FROM animals
 	ORDER BY id ASC
 ROLLBACK;
+
+-- DAY 3 ---
+
+/* Create a table named vets with the following columns */
+CREATE TABLE vets(
+	id INT GENERATED ALWAYS AS IDENTITY,
+	name char(50),
+	age INT,
+	date_of_graduation DATE,
+	PRIMARY KEY(id)
+);
+
+/* Create table specializations */
+CREATE TABLE specializations(
+	vet_id INT,
+	species_id INT,
+	FOREIGN KEY(vet_id) REFERENCES vets(id),
+	FOREIGN KEY(species_id) REFERENCES species(id)
+);
+
+/* Create table Visits */
+CREATE TABLE visits(
+	animals_id INT,
+	visit_date DATE,
+	vet_id INT,
+	FOREIGN KEY(vet_id) REFERENCES vets(id),
+	FOREIGN KEY(animals_id) REFERENCES animals(id)
+);
